@@ -1,516 +1,352 @@
 <!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Halaman web informatif tentang kota Bandung - sejarah, geografis, wisata, dan informasi lainnya." />
-    <meta name="author" content="Zayyidan" />
-    <title>Halaman Web Bandung - Kota Kembang</title>
-<style>
-*, *::before, *::after {
-    box-sizing: border-box;
-}
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f4f8;
-    color: #333;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    scroll-behavior: smooth;
-}
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Halaman Web Bandung</title>
+        <style>
+            /* Reset & base */
+            *, *::before, *::after {
+                box-sizing: border-box;
+            }
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                line-height: 1.6;
+                margin: 0;
+                padding: 0;
+                background-color: #f0f4f8;
+                color: #333;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
 
-/* Header styling */
-header {
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-    color: #fff;
-    padding: 1.2rem 1rem;
-    text-align: center;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    max-width: 600px;
-    margin: 0 auto;
-    border-radius: 0 0 12px 12px;
-    transition: transform 0.4s ease, box-shadow 0.3s ease;
-    transform: translateY(0);
-}
+            header {
+                background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+                color: #fff;
+                padding: 2rem 1rem;
+                text-align: center;
+                box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+                animation: fadeInDown 1s ease forwards;
+            }
 
-header.hide {
-    transform: translateY(-100%);
-    box-shadow: none;
-}
+            header h1 {
+                margin: 0 0 0.5rem;
+                font-size: 3rem;
+                letter-spacing: 3px;
+                text-shadow: 2px 2px 5px rgb(241, 241, 241);
+            }
 
-header.sticky {
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
+            header img {
+                width: 100%;
+                max-width: 500px;
+                height: auto;
+                border-radius: 1px;
+                box-shadow: 0 8px 16px rgba(42,82,152,0.6);
+                margin-top: 1rem;
+                transition: transform 0.4s ease;
+                cursor: pointer;
+                animation: floatImage 3s ease-in-out infinite;
+            }
+            header img:hover {
+                transform: scale(1.05) rotate(2deg);
+            }
 
-header h1 {
-    margin: 0 0 0.5rem;
-    font-size: 2.2rem;
-    letter-spacing: 3px;
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-}
+            header p {
+                max-width: 720px;
+                margin: 1.2rem auto 0;
+                font-size: 1.15rem;
+                font-weight: 400;
+                letter-spacing: 0.5px;
+                line-height: 1.5;
+                text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+            }
 
-header img {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(42,82,152,0.6);
-    margin-top: 1rem;
-    transition: transform 0.4s ease;
-    cursor: pointer;
-    animation: floatImage 3s ease-in-out infinite;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
+            nav ul {
+                list-style: none;
+                margin: 1.5rem 0 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                gap: 2rem;
+                flex-wrap: wrap;
+                animation: fadeInUp 1s ease 0.5s forwards;
+                opacity: 0;
+            }
+            nav ul.show {
+                opacity: 1;
+            }
+            nav ul li {
+                font-weight: 600;
+                font-size: 1.1rem;
+            }
+            nav ul li a {
+                color: #fff;
+                text-decoration: none;
+                padding: 0.3rem 0.7rem;
+                border-radius: 5px;
+                transition: all 0.3s ease;
+                box-shadow: inset 0 0 0 0 #fff;
+                border: 2px solid transparent;
+            }
+            nav ul li a:hover,
+            nav ul li a:focus {
+                color: #1e3c72;
+                background-color: #fff;
+                border-color: #fff;
+                box-shadow: inset 200px 0 0 0 #fff;
+            }
 
-header img:hover {
-    transform: scale(1.05) rotate(2deg);
-}
+            div > article,
+            div > section,
+            aside article {
+                background: #fff;
+                max-width: 720px;
+                margin: 1.4rem auto;
+                padding: 1.6rem 1.8rem;
+                border-radius: 12px;
+                box-shadow: 0 6px 20px rgb(0 0 0 / 0.08);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                cursor: default;
+            }
+            div > article:hover,
+            div > section:hover,
+            aside article:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+            }
 
-header p {
-    max-width: 600px;
-    margin: 1rem auto 0;
-    font-size: 1rem;
-    font-weight: 400;
-    letter-spacing: 0.5px;
-    line-height: 1.5;
-    text-shadow: 0 1px 1px rgba(0,0,0,0.1);
-}
+            h2 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+                color: #1e3c72;
+                letter-spacing: 0.8px;
+            }
 
-nav ul {
-    list-style: none;
-    margin: 1.5rem 0 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-}
+            article img, section img, aside img {
+                width: 100%;
+                max-width: 500px;
+                height: auto;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                margin-bottom: 1rem;
+                transition: transform 0.3s ease;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            article img:hover, section img:hover, aside img:hover {
+                transform: scale(1.07) rotate(1deg);
+            }
 
-nav ul li {
-    font-weight: 600;
-    font-size: 1.1rem;
-}
+            p {
+                font-size: 1rem;
+                line-height: 1.55;
+                color: #444;
+                margin-bottom: 0;
+                text-align: justify;
+            }
 
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    padding: 0.3rem 0.7rem;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    box-shadow: inset 0 0 0 0 #fff;
-    border: 2px solid transparent;
-    position: relative;
-}
+            aside {
+                max-width: 720px;
+                margin: 2rem auto 3rem auto;
+                padding: 1rem 1.5rem;
+            }
 
-nav ul li a:hover,
-nav ul li a:focus {
-    color: #1e3c72;
-    background-color: #fff;
-    border-color: #fff;
-    box-shadow: inset 200px 0 0 0 #fff;
-    z-index: 10;
-}
+            aside header h2 {
+                color: #2a5298;
+                margin-top: 0;
+                font-weight: 700;
+                font-size: 1.8rem;
+            }
+            aside header p {
+                font-style: italic;
+                font-weight: 600;
+                color: #666;
+                margin-top: -0.4rem;
+                margin-bottom: 1rem;
+            }
+            figure {
+                margin: 1rem auto;
+                text-align: center;
+                max-width: 250px;
+            }
+            figure img {
+                width: 100%;
+                max-width: 200px;
+                height: auto;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            }
+            figcaption {
+                margin-top: 0.3rem;
+                font-weight: 600;
+                font-size: 1rem;
+                color: #1e3c72;
+            }
 
-nav ul li a.active {
-    background-color: #fff;
-    color: #1e3c72;
-    border-color: #fff;
-    box-shadow: inset 200px 0 0 0 #fff;
-    font-weight: 700;
-    pointer-events: none;
-}
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 1.2rem;
+            }
+            th, td {
+                padding: 12px 15px;
+                border-bottom: 1px solid #ddd;
+            }
+            th {
+                background: #2a5298;
+                color: white;
+                font-weight: 700;
+                text-align: left;
+            }
 
-div > article,
-div > section,
-aside article {
-    background: #fff;
-    max-width: 720px;
-    margin: 5rem auto 1.4rem; /* margin-top increased to avoid header overlap */
-    padding: 1.6rem 1.8rem;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgb(0 0 0 / 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.8s ease;
-    cursor: default;
-    opacity: 0;
-    transform: translateY(30px);
-}
+            footer {
+                background: #1e3c72;
+                color: #fff;
+                text-align: center;
+                padding: 1rem 1rem;
+                font-weight: 600;
+                letter-spacing: 0.7px;
+                box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+                margin-top: auto;
+            }
 
-div > article.visible,
-div > section.visible,
-aside article.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
+            /* Animations */
+            @keyframes fadeInDown {
+                0% {
+                    opacity: 0;
+                    transform: translateY(-30px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
 
-div > article:hover,
-div > section:hover,
-aside article:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 15px 25px rgba(0,0,0,0.15);
-}
+            @keyframes fadeInUp {
+                0% {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
 
-h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #1e3c72;
-    letter-spacing: 0.8px;
-}
+            @keyframes floatImage {
+                0%, 100% {
+                    transform: translateY(0);
+                }
+                50% {
+                    transform: translateY(-15px);
+                }
+            }
 
-article img, section img, aside img {
-    width: 100%;
-    max-width: 500px;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    margin-bottom: 1rem;
-    transition: transform 0.3s ease;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-article img:hover, section img:hover, aside img:hover {
-    transform: scale(1.07) rotate(1deg);
-}
-
-p {
-    font-size: 1rem;
-    line-height: 1.55;
-    color: #444;
-    margin-bottom: 0;
-    text-align: justify;
-}
-
-aside {
-    max-width: 720px;
-    margin: 2rem auto 3rem auto;
-    padding: 1rem 1.5rem;
-}
-
-aside header h2 {
-    color: #2a5298;
-    margin-top: 0;
-    font-weight: 700;
-    font-size: 1.8rem;
-}
-
-aside header p {
-    font-style: italic;
-    font-weight: 600;
-    color: #666;
-    margin-top: -0.4rem;
-    margin-bottom: 1rem;
-}
-
-figure {
-    margin: 1rem auto;
-    text-align: center;
-    max-width: 250px;
-}
-
-figure img {
-    width: 100%;
-    max-width: 200px;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-}
-
-figcaption {
-    margin-top: 0.3rem;
-    font-weight: 600;
-    font-size: 1rem;
-    color: #1e3c72;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1.2rem;
-}
-
-th, td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background: #2a5298;
-    color: white;
-    font-weight: 700;
-    text-align: left;
-}
-
-footer {
-    background: #1e3c72;
-    color: #fff;
-    text-align: center;
-    padding: 1rem 1rem;
-    font-weight: 600;
-    letter-spacing: 0.7px;
-    box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
-    margin-top: auto;
-}
-
-/* Back to Top button */
-#btnTop {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    display: none;
-    background-color: #2a5298;
-    color: white;
-    border: none;
-    padding: 12px 16px;
-    border-radius: 50%;
-    font-size: 1.5rem;
-    cursor: pointer;
-    box-shadow: 0 5px 10px rgba(42,82,152,0.7);
-    transition: background-color 0.3s ease;
-    z-index: 1001;
-}
-
-#btnTop:hover {
-    background-color: #1e3c72;
-}
-
-/* Animations */
-@keyframes fadeInDown {
-    0% {
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInUp {
-    0% {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes floatImage {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-15px);
-    }
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 1.8rem;
-    }
-    nav ul {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    header {
-        max-width: 100%;
-        border-radius: 0;
-        padding: 1rem 1rem;
-    }
-    div > article, div > section, aside article {
-        margin: 1rem;
-        padding: 1rem;
-    }
-    aside {
-        padding: 1rem;
-    }
-}
-
-@media (max-width: 400px) {
-    header h1 {
-        font-size: 1.4rem;
-    }
-    header img {
-        max-width: 100%;
-    }
-}
-</style>
-
-
-</head>
-<body>
-    <header id="pageHeader"> 
-        <h1>Bandung</h1> 
-        <img src="img/Gedung Sate.jpg" alt="logo" width="500px" height="100px" />
-        <p>Kota metropolitan terbesar di Provinsi Jawa Barat, sekaligus menjadi ibu kota provinsi tersebut.</p>
-        <nav>
-            <ul>
-                <li><a href="#sejarah">Sejarah</a></li>
-                <li><a href="#geografis">Geografis</a></li>
-                <li><a href="#wisata">Wisata</a></li>
-                <li><a href="#lembang">Lembang</a></li>
-                <li><a href="#observatorium">Observatorium</a></li>
-            </ul> 
-        </nav>
-    </header>
-    <div>
-        <article id="sejarah">
-            <h2>Sejarah</h2>
-            <img src="img/65e5346086f1a976234330.jpg" alt="logo" width="500px" height="100px" />
-            <p> Kata Bandung berasal dari kata bendung atau bendungan karena terbendungnya sungai Citarum oleh lava Gunung Tangkuban Parahu yang lalu membentuk telaga. Legenda yang diceritakan oleh orang-orang tua di Bandung mengatakan bahwa nama Bandung diambil dari sebuah kendaraan air yang terdiri dari dua perahu yang diikat berdampingan yang disebut perahu bandung yang digunakan oleh Bupati Bandung, R.A. Wiranatakusumah II, untuk melayari Ci Tarum dalam mencari tempat kedudukan kabupaten yang baru untuk menggantikan ibu kota yang lama di Dayeuhkolot.
-            <br /><br />
-            Berdasarkan filosofi Sunda, kata Bandung juga berasal dari kalimat Nga-Bandung-an Banda Indung, yang merupakan kalimat sakral dan luhur karena mengandung nilai ajaran Sunda. Nga-Bandung-an artinya menyaksikan atau bersaksi. Banda adalah segala sesuatu yang berada di alam hidup yaitu di bumi dan atmosfer, baik makhluk hidup maupun benda mati. Sinonim dari banda adalah harta. Indung berarti Ibu atau Bumi, disebut juga sebagai Ibu Pertiwi tempat Banda berada.</p>
-        </article>
-        <article id="geografis">
-            <h2>Geografis</h2>
-            <img src="img/185744962_medium.png" alt="logo" width="500px" height="100px" />
-            <p> Kota Bandung dikelilingi oleh pegunungan, sehingga bentuk morfologi wilayahnya bagaikan sebuah mangkok raksasa, secara geografis kota ini terletak di tengah-tengah provinsi Jawa Barat, serta berada pada ketinggian ±768 m di atas permukaan laut, dengan titik tertinggi di berada di sebelah utara dengan ketinggian 1.050 meter di atas permukaan laut dan sebelah selatan merupakan kawasan rendah dengan ketinggian 675 meter di atas permukaan laut.
-            <br /><br />
-            Kota Bandung dialiri dua sungai utama, yaitu Sungai Cikapundung dan Sungai Citarum beserta anak-anak sungainya yang pada umumnya mengalir ke arah selatan dan bertemu di Sungai Citarum. Dengan kondisi yang demikian, Bandung selatan sangat rentan terhadap masalah banjir terutama pada musim hujan.</p>
-        </article>
-        <article id="wisata">
-            <h2>Wisata</h2>
-            <img src="img/Tempat-Wisata-di-Ciwidey-Bandung.jpg" alt="logo" width="500px" height="100px" />
-            <p> Sejak dibukanya Jalan Tol Cipularang, kota Bandung telah menjadi tujuan utama dalam menikmati liburan akhir pekan terutama dari masyarakat yang berasal dari Jakarta sekitarnya. Selain menjadi kota wisata belanja, kota Bandung juga dikenal dengan sejumlah besar bangunan lama berarsitektur peninggalan Belanda.</p>
-        </article>
-        <section id="lembang">
-            <h2>Farm House Lembang</h2>
-            <img src="img/farm-house-susu-lembang-1_169.jpg" alt="logo" width="500px" height="100px" />
-            <p> Berada di jalur utama Bandung-Lembang, Farm House menjadi objek wisata yang tidak pernah sepi pengunjung. Selain karena letaknya strategis, kawasan ini juga menghadirkan nuansa wisata khas Eropa. Semua itu diterapkan dalam bentuk spot swafoto Instagramable.</p>
-        </section>
-        <section id="observatorium">
-            <h2>Observatorium Bosscha</h2> 
-            <img src="img/oservatorium-bosscha-2_169.jpg" alt="logo" width="500px" height="100px" />
-            <p> Memiliki beberapa teleskop, antara lain, Refraktor Ganda Zeiss, Schmidt Bimasakti, Refraktor Bamberg, Cassegrain GOTO, dan Teleskop Surya. Refraktor Ganda Zeiss adalah jenis teleskop terbesar untuk meneropong bintang. Benda ini diletakkan pada atap kubah sehingga saat teropong digunakan, atap tersebut harus dibuka. Observatorium Bosscha boleh dikunjungi oleh siapa pun, tanpa tiket. Namun, bagi yang ingin menggunakan teleskop Zeiss, wajib mendaftarkan diri. Untuk instansi atau lembaga pendidikan, diberikan jadwal hari Selasa sampai Jumat. Sementara itu, kunjungan individu dibuka setiap hari Sabtu.</p>
-        </section>
-        <aside>
+            /* Responsive adjustments */
+            @media (max-width: 768px) {
+                header h1 {
+                    font-size: 2rem;
+                }
+                nav ul {
+                    flex-direction: column;
+                    gap: 1rem;
+                }
+                div > article, div > section, aside article {
+                    margin: 1rem;
+                    padding: 1rem;
+                }
+                aside {
+                    padding: 1rem;
+                }
+            }
+            @media (max-width: 400px) {
+                header h1 {
+                    font-size: 1.5rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header> 
+            <h1>Bandung</h1> 
+            <img src="img/Gedung Sate.jpg" alt="logo" width="500px" height="100px" />
+            <p>Kota metropolitan terbesar di Provinsi Jawa Barat, sekaligus menjadi ibu kota provinsi tersebut.</p>
+            <nav>
+                <ul class="show">
+                    <li><a href="sejarah.html">Sejarah</a></li>
+                    <li><a href="geografis.html">Geografis</a></li>
+                    <li><a href="wisata.html">Wisata</a></li>
+                    <li><a href="lembang.html">Lembang</a></li>
+                    <li><a href="observatorium.html">Observatorium</a></li>
+                </ul> 
+            </nav>
+        </header>
+        <div>
             <article>
-                <header>
-                    <h2>Kota Bandung</h2>
-                    <p>Kota Kembang Paris van Java</p>
-                    <figure>
-                        <img src="img/Lambang_Kota_Bandung.png" alt="logo" width="500px" height="150px" />
-                        <figcaption>Lambang</figcaption>
-                    </figure>
-                </header>
-                <section>
-                    <h3>Informasi Lainnya</h3>
-                    <table>
-                        <tr>
-                            <th>Negara</th>
-                            <td>Indonesia</td>
-                        </tr>
-                        <tr>
-                            <th>Hari Jadi</th>
-                            <td>25 September 1810</td>
-                        </tr>
-                        <tr>
-                            <th>Luas Total</th>
-                            <td>167.67 km<sup>2</sup></td>
-                        </tr>
-                        <tr>
-                            <th>Bahasa Daerah</th>
-                            <td>Sunda</td>
-                        </tr>
-                    </table>
-                </section>
+                <h2>Sejarah</h2>
+                <img src="img/65e5346086f1a976234330.jpg" alt="logo" width="500px" height="100px" />
+                <p> Kata Bandung berasal dari kata bendung atau bendungan karena terbendungnya sungai Citarum oleh lava Gunung Tangkuban Parahu yang lalu membentuk telaga. Legenda yang diceritakan oleh orang-orang tua di Bandung mengatakan bahwa nama Bandung diambil dari sebuah kendaraan air yang terdiri dari dua perahu yang diikat berdampingan yang disebut perahu bandung yang digunakan oleh Bupati Bandung, R.A. Wiranatakusumah II, untuk melayari Ci Tarum dalam mencari tempat kedudukan kabupaten yang baru untuk menggantikan ibu kota yang lama di Dayeuhkolot.
+                <br /><br />
+                Berdasarkan filosofi Sunda, kata Bandung juga berasal dari kalimat Nga-Bandung-an Banda Indung, yang merupakan kalimat sakral dan luhur karena mengandung nilai ajaran Sunda. Nga-Bandung-an artinya menyaksikan atau bersaksi. Banda adalah segala sesuatu yang berada di alam hidup yaitu di bumi dan atmosfer, baik makhluk hidup maupun benda mati. Sinonim dari banda adalah harta. Indung berarti Ibu atau Bumi, disebut juga sebagai Ibu Pertiwi tempat Banda berada.</p>
             </article>
-        </aside>
-    </div>
-    <button id="btnTop" aria-label="Scroll to top" title="Kembali ke atas">↑</button>
-    <footer>WEB BY ZAYYIDAN</footer>
-
-    <script>
-        // Scroll Reveal Animation
-        const sections = document.querySelectorAll('article, section, aside article');
-        const options = {
-            threshold: 0.15,
-        };
-        const callback = (entries, observer) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        };
-        const observer = new IntersectionObserver(callback, options);
-        sections.forEach(section => observer.observe(section));
-
-        // Back to Top button
-        const btnTop = document.getElementById('btnTop');
-        window.addEventListener('scroll', () => {
-            if(window.pageYOffset > 300) {
-                btnTop.style.display = 'block';
-            } else {
-                btnTop.style.display = 'none';
-            }
-        });
-        btnTop.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Highlight active nav item on scroll
-        const navLinks = document.querySelectorAll('nav ul li a');
-        const sectionsMap = {};
-        navLinks.forEach(link => {
-            const id = link.getAttribute('href').substring(1);
-            const section = document.getElementById(id);
-            if(section) {
-                sectionsMap[id] = section.offsetTop;
-            }
-            link.addEventListener('click', e => {
-                navLinks.forEach(l => l.classList.remove('active'));
-                link.classList.add('active');
-            });
-        });
-
-        window.addEventListener('scroll', () => {
-            let scrollPos = window.scrollY + window.innerHeight/3;
-
-            navLinks.forEach(link => link.classList.remove('active'));
-            for(const id in sectionsMap) {
-                if(scrollPos >= sectionsMap[id]) {
-                    document.querySelector('nav ul li a[href="#'+id+'"]').classList.add('active');
-                }
-            }
-        });
-
-
-        // Header hide on scroll down, show on scroll up
-        const header = document.getElementById('pageHeader');
-        let lastScrollTop = 0;
-        window.addEventListener('scroll', () => {
-            let st = window.pageYOffset || document.documentElement.scrollTop;
-            if (st > lastScrollTop && st > 50) {
-                // scroll down - hide header
-                header.classList.add('hide');
-            } else {
-                // scroll up - show header
-                header.classList.remove('hide');
-            }
-            lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
-        });
-    </script>
-</body>
+            <article>
+                <h2>Geografis</h2>
+                <img src="img/185744962_medium.png" alt="logo" width="500px" height="100px" />
+                <p> Kota Bandung dikelilingi oleh pegunungan, sehingga bentuk morfologi wilayahnya bagaikan sebuah mangkok raksasa, secara geografis kota ini terletak di tengah-tengah provinsi Jawa Barat, serta berada pada ketinggian ±768 m di atas permukaan laut, dengan titik tertinggi di berada di sebelah utara dengan ketinggian 1.050 meter di atas permukaan laut dan sebelah selatan merupakan kawasan rendah dengan ketinggian 675 meter di atas permukaan laut.
+                <br /><br />
+                Kota Bandung dialiri dua sungai utama, yaitu Sungai Cikapundung dan Sungai Citarum beserta anak-anak sungainya yang pada umumnya mengalir ke arah selatan dan bertemu di Sungai Citarum. Dengan kondisi yang demikian, Bandung selatan sangat rentan terhadap masalah banjir terutama pada musim hujan.</p>
+            </article>
+            <article>
+                <h2>Wisata</h2>
+                <img src="img/Tempat-Wisata-di-Ciwidey-Bandung.jpg" alt="logo" width="500px" height="100px" />
+                <p> Sejak dibukanya Jalan Tol Cipularang, kota Bandung telah menjadi tujuan utama dalam menikmati liburan akhir pekan terutama dari masyarakat yang berasal dari Jakarta sekitarnya. Selain menjadi kota wisata belanja, kota Bandung juga dikenal dengan sejumlah besar bangunan lama berarsitektur peninggalan Belanda.</p>
+            </article>
+            <section>
+                <h2>Farm House Lembang</h2>
+                <img src="img/farm-house-susu-lembang-1_169.jpg" alt="logo" width="500px" height="100px" />
+                <p> Berada di jalur utama Bandung-Lembang, Farm House menjadi objek wisata yang tidak pernah sepi pengunjung. Selain karena letaknya strategis, kawasan ini juga menghadirkan nuansa wisata khas Eropa. Semua itu diterapkan dalam bentuk spot swafoto Instagramable.</p>
+            </section>
+            <section>
+                <h2>Observatorium Bosscha</h2> 
+                <img src="img/oservatorium-bosscha-2_169.jpg" alt="logo" width="500px" height="100px" />
+                <p> Memiliki beberapa teleskop, antara lain, Refraktor Ganda Zeiss, Schmidt Bimasakti, Refraktor Bamberg, Cassegrain GOTO, dan Teleskop Surya. Refraktor Ganda Zeiss adalah jenis teleskop terbesar untuk meneropong bintang. Benda ini diletakkan pada atap kubah sehingga saat teropong digunakan, atap tersebut harus dibuka. Observatorium Bosscha boleh dikunjungi oleh siapa pun, tanpa tiket. Namun, bagi yang ingin menggunakan teleskop Zeiss, wajib mendaftarkan diri. Untuk instansi atau lembaga pendidikan, diberikan jadwal hari Selasa sampai Jumat. Sementara itu, kunjungan individu dibuka setiap hari Sabtu.</p>
+            </section>
+            <aside>
+                <article>
+                    <header>
+                        <h2>Kota Bandung</h2>
+                        <p>Kota Kembang Paris van Java</p>
+                        <figure>
+                            <img src="img/Lambang_Kota_Bandung.png" alt="logo" width="500px" height="150px" />
+                            <figcaption>Lambang</figcaption>
+                        </figure>
+                    </header>
+                    <section>
+                        <h3>Informasi Lainnya</h3>
+                        <table>
+                            <tr>
+                                <th>Negara</th>
+                                <td>Indonesia</td>
+                            </tr>
+                            <tr>
+                                <th>Hari Jadi</th>
+                                <td>25 September 1810</td>
+                            </tr>
+                            <tr>
+                                <th>Luas Total</th>
+                                <td>167.67 km<sup>2</sup></td>
+                            </tr>
+                            <tr>
+                                <th>Bahasa Daerah</th>
+                                <td>Sunda</td>
+                            </tr>
+                        </table>
+                    </section>
+                </article>
+            </aside>
+        </div>
+        <footer>WEB BY ZAYYIDAN</footer>
+    </body>
 </html>
 
-  
