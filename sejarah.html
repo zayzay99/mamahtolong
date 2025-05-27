@@ -23,6 +23,7 @@
       background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
       color: #333;
       animation: fadeInUp 1s ease forwards;
+      transition: background-color 0.5s ease, color 0.5s ease;
     }
     h2 {
       color: #054a91;
@@ -79,6 +80,24 @@
       line-height: 1.7;
       margin-bottom: 1.3em;
     }
+    /* Dark mode styles */
+    .dark-mode {
+      background: #121217;
+      color: #ddd;
+    }
+    .dark-mode div.content-wrapper {
+      background: #1e2238;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.8);
+    }
+    .dark-mode h2 {
+      color: #a1c4fd;
+    }
+    .dark-mode a {
+      background: linear-gradient(45deg, #0056b3, #1ab7ff);
+    }
+    .dark-mode a:hover {
+      background: linear-gradient(45deg, #004dcf, #1ab7ff);
+    }
     /* Responsive */
     @media (max-width: 600px) {
       body {
@@ -95,31 +114,66 @@
         font-size: 0.95rem;
       }
     }
+    /* Toggle button styles */
+    #mode-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.3);
+      border: none;
+      border-radius: 20px;
+      padding: 10px 15px;
+      font-weight: 600;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+    }
+    #mode-toggle:hover {
+      background: #fff;
+      color: #1e3c72;
+    }
   </style>
 </head>
 <body>
+  <button id="mode-toggle" aria-label="Toggle dark and light mode">Dark Mode</button>
   <a href="Beranda.html">Kembali</a>
   <div class="content-wrapper">
     <h2 id="sejarah">Sejarah</h2>
     <img src="img/65e5346086f1a976234330.jpg" alt="sejarah" />
     <p>
-      Kata Bandung berasal dari kata bendung atau bendungan karena terbendungnya sungai Citarum oleh
-      lava Gunung Tangkuban Parahu yang lalu membentuk telaga. Legenda yang diceritakan oleh
-      orang-orang tua di Bandung mengatakan bahwa nama Bandung diambil dari sebuah kendaraan air
-      yang terdiri dari dua perahu yang diikat berdampingan yang disebut perahu bandung yang
-      digunakan oleh Bupati Bandung, R.A. Wiranatakusumah II, untuk melayari Ci Tarum dalam mencari
-      tempat kedudukan kabupaten yang baru untuk menggantikan ibu kota yang lama di Dayeuhkolot.
+     Sekitar akhir tahun 1808/awal tahun 1809, Bupati beserta sejumlah rakyatnya pindah dari Krapyak mendekati lahan bakal ibukota baru. Mula-mula Bupati tinggal di Cikalintu (daerah Cipaganti), kemudian pindah ke Balubur Hilir, selanjutnya pindah lagi ke Kampung Bogor (Kebon Kawung, pada lahan Gedung Pakuan sekarang). Bupati memimpin sejumlah rakyatnya, termasuk penduduk Kampung Balubur Hilir, membuka hutan pada lahan bakal ibukota (daerah Cikapundung hilir). Tidak diketahui secara pasti, berapa lama Kota Bandung dibangun. Akan tetapi, Kota itu dibangun bukan atas prakarsa Daendels, melainkan atas prakarsa Bupati Bandung, bahkan pembangunan kota itu dipimpin langsung oleh Bupati. Dengan kata lain Bupati R.A. Wiranatakusumah II adalah pendiri (The Founding Father) Kota Bandung.
     </p>
 
     <p>
-      Berdasarkan filosofi Sunda, kata Bandung juga berasal dari kalimat Nga-Bandung-an Banda
-      Indung, yang merupakan kalimat sakral dan luhur karena mengandung nilai ajaran Sunda.
-      Nga-Bandung-an artinya menyaksikan atau bersaksi. Banda adalah segala sesuatu yang berada di
-      alam hidup yaitu di bumi dan atmosfer, baik makhluk hidup maupun benda mati. Sinonim dari
-      banda adalah harta. Indung berarti Ibu atau Bumi, disebut juga sebagai Ibu Pertiwi tempat
-      Banda berada.
+     Kota Bandung tidak berdiri bersamaan dengan pembentukan Kabupaten Bandung. Kota itu dibangun dengan tenggang waktu sangat jauh setelah Kabupaten Bandung berdiri. Kabupaten Bandung dibentuk pada sekitar pertengahan abad ke-17 Masehi, dengan Bupati pertama Tumenggung Wirangunangun. Ia memerintah Kabupaten Bandung beribukota di Krapyak (sekarang Dayeuhkolot), kira-kira 11 kilometer ke arah selatan dari pusat Kota Bandung sekarang. Ketika Kabupaten Bandung dipimpin oleh Bupati ke-6, yakni R.A. Wiranatakusumah II (1794-1829) yang dijiluki "Dalem Kaum", kekuasaan di Nusantara beralih dari Kompeni kepada Pemerintah Hindia Belanda, dengan Gubernur Jenderal pertama Herman Willem Daendels (1808-1811). Untuk kelancaran menjalankan tugasnya di Pulau Jawa, Daendels membangun Jalan Raya Pos (Groote Poshweg) dari Anyer di ujung Jawa Barat ke Panarukan di ujung Jawa Timur (± 1000 kilometer). Pembangunan jalan raya itu dilakukan oleh rakyat pribumi di bawah pimpinan bupati daerah masing-masing.
     </p>
   </div>
+
+  <script>
+    const toggleBtn = document.getElementById('mode-toggle');
+    const body = document.body;
+
+    // Load saved mode from localStorage
+    const savedMode = localStorage.getItem('colorMode');
+    if (savedMode === 'dark') {
+        body.classList.add('dark-mode');
+        toggleBtn.textContent = 'Light Mode';
+    } else {
+        toggleBtn.textContent = 'Dark Mode';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        if (body.classList.contains('dark-mode')) {
+            toggleBtn.textContent = 'Light Mode';
+            localStorage.setItem('colorMode', 'dark');
+        } else {
+            toggleBtn.textContent = 'Dark Mode';
+            localStorage.setItem('colorMode', 'light');
+        }
+    });
+  </script>
 </body>
 </html>
-

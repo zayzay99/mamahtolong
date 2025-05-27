@@ -23,6 +23,7 @@
             background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
             color: #333;
             animation: fadeInUp 1s ease forwards;
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
         h3 {
             color: #054a91;
@@ -79,6 +80,24 @@
             line-height: 1.7;
             margin-bottom: 1.3em;
         }
+        /* Dark mode styles */
+        .dark-mode {
+            background: #121217;
+            color: #ddd;
+        }
+        .dark-mode div.content-wrapper {
+            background: #1e2238;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.8);
+        }
+        .dark-mode h3 {
+            color: #a1c4fd;
+        }
+        .dark-mode a {
+            background: linear-gradient(45deg, #0056b3, #1ab7ff);
+        }
+        .dark-mode a:hover {
+            background: linear-gradient(45deg, #004dcf, #1ab7ff);
+        }
         /* Responsive */
         @media (max-width: 600px) {
             body {
@@ -95,18 +114,62 @@
                 font-size: 0.95rem;
             }
         }
+        /* Toggle button styles */
+        #mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.3);
+            border: none;
+            border-radius: 20px;
+            padding: 10px 15px;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            user-select: none;
+        }
+        #mode-toggle:hover {
+            background: #fff;
+            color: #1e3c72;
+        }
     </style>
 </head>
 <body>
+    <button id="mode-toggle" aria-label="Toggle dark and light mode">Dark Mode</button>
     <a href="Beranda.html">Kembali</a>
     <div class="content-wrapper">
         <h3>Farm House Lembang</h3>
         <img src="img/farm-house-susu-lembang-1_169.jpg" alt="Farm House" />
         <p>
-            Berada di jalur utama Bandung-Lembang, Farm House menjadi objek wisata yang tidak pernah sepi
-            pengunjung. Selain karena letaknya strategis, kawasan ini juga menghadirkan nuansa wisata khas
-            Eropa. Semua itu diterapkan dalam bentuk spot swafoto Instagramable.
+            Farmhouse Lembang merupakan tempat wisata fenomenal dan alami yang cocok untuk dikunjungi saat berlibur. Farmhouse Lembang atau yang dikenal dengan Farmhouse Susu Lembang ditata di kawasan wisata terpadu yang mengusung tema perkebunan dan peternakan bergaya eropa. Sejak dibuka pada bulan Desember tahun 2015, tempat wisata yang terletak berdekatan dengan Observatorium Bosscha dan Jendela Alam ini menjadi tempat wisata Lembang yang paling diminati para pelancong. Kondisi alam yang asri dan indah ditambah konsep wisata yang bercirikan eropa menjadikan Farmhouse Lembang Bandung menjadi tempat yang sangat cocok bagi kamu untuk berwisata bersama keluarga maupun teman.
         </p>
     </div>
+
+    <script>
+        const toggleBtn = document.getElementById('mode-toggle');
+        const body = document.body;
+
+        // Load saved mode from localStorage
+        const savedMode = localStorage.getItem('colorMode');
+        if (savedMode === 'dark') {
+            body.classList.add('dark-mode');
+            toggleBtn.textContent = 'Light Mode';
+        } else {
+            toggleBtn.textContent = 'Dark Mode';
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                toggleBtn.textContent = 'Light Mode';
+                localStorage.setItem('colorMode', 'dark');
+            } else {
+                toggleBtn.textContent = 'Dark Mode';
+                localStorage.setItem('colorMode', 'light');
+            }
+        });
+    </script>
 </body>
 </html>

@@ -23,6 +23,7 @@
             background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
             color: #333;
             animation: fadeInUp 1s ease forwards;
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
         h3 {
             color: #054a91;
@@ -79,6 +80,24 @@
             line-height: 1.7;
             margin-bottom: 1.3em;
         }
+        /* Dark mode styles */
+        .dark-mode {
+            background: #121217;
+            color: #ddd;
+        }
+        .dark-mode div.content-wrapper {
+            background: #1e2238;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.8);
+        }
+        .dark-mode h3 {
+            color: #a1c4fd;
+        }
+        .dark-mode a {
+            background: linear-gradient(45deg, #0056b3, #1ab7ff);
+        }
+        .dark-mode a:hover {
+            background: linear-gradient(45deg, #004dcf, #1ab7ff);
+        }
         /* Responsive */
         @media (max-width: 600px) {
             body {
@@ -95,16 +114,63 @@
                 font-size: 0.95rem;
             }
         }
+        /* Toggle button styles */
+        #mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.3);
+            border: none;
+            border-radius: 20px;
+            padding: 10px 15px;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            user-select: none;
+        }
+        #mode-toggle:hover {
+            background: #fff;
+            color: #1e3c72;
+        }
     </style>
 </head>
 <body>
+    <button id="mode-toggle" aria-label="Toggle dark and light mode">Dark Mode</button>
     <a href="Beranda.html">Kembali</a>
     <div class="content-wrapper">
         <h3>Observatorium Bosscha</h3>
         <img src="img/oservatorium-bosscha-2_169.jpg" alt="Observatorium Bosscha" />
         <p>
-            Memiliki beberapa teleskop, antara lain, Refraktor Ganda Zeiss, Schmidt Bimasakti, Refraktor
-            Bamberg, Cassegrain GOTO, dan Teleskop Surya. Refraktor Ganda Zeiss adalah jenis teleskop
-            terbesar untuk meneropong bintang. Benda ini diletakkan pada atap kubah sehingga saat teropong
-            digunakan, atap tersebut harus dibuka. Observatorium Bosscha boleh dikunjungi oleh siapapun,
-            tanpa tiket
+           Observatorium Bosscha genap berusia 100 tahun pada Januari 2023 ini. Kiprah observatorium itu dimulai pada tahun 1923, tepat saat pembangunannya mulai dilaksanakan.
+           Observatorium Bosscha yang berdiri kokoh di atas perbukitan Lembang, Kabupaten Bandung Barat (KBB), menjadi satu di antara beberapa observatorium astronomi di belahan bumi Selatan sebagai tonggak awal astronomi modern di Asia Tenggara.
+        </p>
+    </div>
+
+    <script>
+        const toggleBtn = document.getElementById('mode-toggle');
+        const body = document.body;
+
+        // Load saved mode from localStorage
+        const savedMode = localStorage.getItem('colorMode');
+        if (savedMode === 'dark') {
+            body.classList.add('dark-mode');
+            toggleBtn.textContent = 'Light Mode';
+        } else {
+            toggleBtn.textContent = 'Dark Mode';
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                toggleBtn.textContent = 'Light Mode';
+                localStorage.setItem('colorMode', 'dark');
+            } else {
+                toggleBtn.textContent = 'Dark Mode';
+                localStorage.setItem('colorMode', 'light');
+            }
+        });
+    </script>
+</body>
+</html>

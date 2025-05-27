@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Wisata</title>
+    <title>Wisata Bandung</title>
     <style>
         @keyframes fadeInUp {
             0% {
@@ -23,6 +23,7 @@
             background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
             color: #333;
             animation: fadeInUp 1s ease forwards;
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
         h2 {
             color: #054a91;
@@ -79,6 +80,24 @@
             line-height: 1.7;
             margin-bottom: 1.3em;
         }
+        /* Dark mode styles */
+        .dark-mode {
+            background: #121217;
+            color: #ddd;
+        }
+        .dark-mode div.content-wrapper {
+            background: #1e2238;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.8);
+        }
+        .dark-mode h2 {
+            color: #a1c4fd;
+        }
+        .dark-mode a {
+            background: linear-gradient(45deg, #0056b3, #1ab7ff);
+        }
+        .dark-mode a:hover {
+            background: linear-gradient(45deg, #004dcf, #1ab7ff);
+        }
         /* Responsive */
         @media (max-width: 600px) {
             body {
@@ -95,19 +114,65 @@
                 font-size: 0.95rem;
             }
         }
+        /* Toggle button styles */
+        #mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.3);
+            border: none;
+            border-radius: 20px;
+            padding: 10px 15px;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            user-select: none;
+        }
+        #mode-toggle:hover {
+            background: #fff;
+            color: #1e3c72;
+        }
     </style>
 </head>
 <body>
+    <button id="mode-toggle" aria-label="Toggle dark and light mode">Dark Mode</button>
     <a href="Beranda.html">Kembali</a>
     <div class="content-wrapper">
         <h2 id="wisata">Wisata</h2>
         <img src="img/Tempat-Wisata-di-Ciwidey-Bandung.jpg" alt="Wisata di Ciwidey" />
         <p>
-            Sejak dibukanya Jalan Tol Cipularang, kota Bandung telah menjadi tujuan utama dalam menikmati
-            liburan akhir pekan terutama dari masyarakat yang berasal dari Jakarta sekitarnya. Selain
-            menjadi kota wisata belanja, kota Bandung juga dikenal dengan sejumlah besar bangunan lama
-            berarsitektur peninggalan Belanda.
+            Ciwidey adalah kecamatan di Kabupaten Bandung, Jawa Barat, Indonesia. Kecamatan ini terletak 35 km di sebelah selatan Kota Bandung, atau sekitar 15 km dari Soreang, ibukota Kabupaten Bandung. Ciwidey sebelum pemekaran kecamatan Rancabali memiliki wilayah yang cukup luas sampai ke perbatasan Kabupaten Cianjur dan memiliki banyak objek wisata. Setelah dimekarkan, Kecamatan Ciwidey kini berperan sebagai daerah penunjang objek wisata yang berada di kecamatan Rancabali.
+        </p>
+        <p>
+            Ciwidey merupakan daerah yang banyak dikunjungi oleh wisatawan karena keindahan alam dan sejumlah objek wisata menarik lainnya. Salah satunya adalah Kawah Putih dan Situ Patenggang yang terkenal akan pesonanya.
         </p>
     </div>
+
+    <script>
+        const toggleBtn = document.getElementById('mode-toggle');
+        const body = document.body;
+
+        // Load saved mode from localStorage
+        const savedMode = localStorage.getItem('colorMode');
+        if (savedMode === 'dark') {
+            body.classList.add('dark-mode');
+            toggleBtn.textContent = 'Light Mode';
+        } else {
+            toggleBtn.textContent = 'Dark Mode';
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                toggleBtn.textContent = 'Light Mode';
+                localStorage.setItem('colorMode', 'dark');
+            } else {
+                toggleBtn.textContent = 'Dark Mode';
+                localStorage.setItem('colorMode', 'light');
+            }
+        });
+    </script>
 </body>
 </html>

@@ -1,352 +1,592 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Halaman Web Bandung</title>
-        <style>
-            /* Reset & base */
-            *, *::before, *::after {
-                box-sizing: border-box;
-            }
-            body {
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                line-height: 1.6;
-                margin: 0;
-                padding: 0;
-                background-color: #f0f4f8;
-                color: #333;
-                min-height: 100vh;
-                display: flex;
-                flex-direction: column;
-            }
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Viewport meta tag -->
+    <title>Halaman Web Bandung</title>
+    <style>
+        /* Reset & base */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #e0e7f1 0%, #f0f4f8 100%);
+            color: #222;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image:
+                radial-gradient(circle at 20% 20%, rgba(42, 82, 152, 0.07) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(42, 82, 152, 0.07) 0%, transparent 40%);
+            background-repeat: no-repeat;
+            background-size: 300px 300px, 300px 300px;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
 
-            header {
-                background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-                color: #fff;
-                padding: 2rem 1rem;
-                text-align: center;
-                box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-                animation: fadeInDown 1s ease forwards;
-            }
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #fff;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+            animation: fadeInDown 1.2s ease forwards;
+            position: relative;
+            overflow: hidden;
+        }
 
-            header h1 {
-                margin: 0 0 0.5rem;
-                font-size: 3rem;
-                letter-spacing: 3px;
-                text-shadow: 2px 2px 5px rgb(241, 241, 241);
-            }
+        header h1 {
+            margin: 0 0 0.5rem;
+            font-size: 3rem;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 6px rgba(241, 241, 241, 0.9);
+            font-weight: 900;
+        }
 
-            header img {
-                width: 100%;
-                max-width: 500px;
-                height: auto;
-                border-radius: 1px;
-                box-shadow: 0 8px 16px rgba(42,82,152,0.6);
-                margin-top: 1rem;
-                transition: transform 0.4s ease;
-                cursor: pointer;
-                animation: floatImage 3s ease-in-out infinite;
-            }
-            header img:hover {
-                transform: scale(1.05) rotate(2deg);
-            }
+        /* Dark mode toggle button inside header */
+        #mode-toggle {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(255,255,255,0.3);
+            border: none;
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            font-weight: 700;
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            user-select: none;
+        }
+        #mode-toggle:hover,
+        #mode-toggle:focus {
+            background: #fff;
+            color: #1e3c72;
+            outline: none;
+        }
 
-            header p {
-                max-width: 720px;
-                margin: 1.2rem auto 0;
-                font-size: 1.15rem;
-                font-weight: 400;
-                letter-spacing: 0.5px;
-                line-height: 1.5;
-                text-shadow: 0 1px 1px rgba(0,0,0,0.1);
-            }
+        header img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(42,82,152,0.7);
+            margin-top: 1rem;
+            transition: transform 0.4s ease, filter 0.4s ease;
+            cursor: pointer;
+            animation: floatImage 4s ease-in-out infinite;
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.15));
+        }
+        header img:hover {
+            transform: scale(1.08) rotate(2deg);
+            filter: drop-shadow(3px 6px 10px rgba(0,0,0,0.25));
+        }
 
-            nav ul {
-                list-style: none;
-                margin: 1.5rem 0 0;
-                padding: 0;
-                display: flex;
-                justify-content: center;
-                gap: 2rem;
-                flex-wrap: wrap;
-                animation: fadeInUp 1s ease 0.5s forwards;
+        header p {
+            max-width: 720px;
+            margin: 1.2rem auto 0;
+            font-size: 1.15rem;
+            font-weight: 400;
+            letter-spacing: 0.6px;
+            line-height: 1.5;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 1.5rem 0 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.5s forwards;
+            opacity: 0;
+        }
+        nav ul.show {
+            opacity: 1;
+        }
+        nav ul li {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.3rem 0.7rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 0 0 0 #fff;
+            border: 2px solid transparent;
+        }
+        nav ul li a:hover,
+        nav ul li a:focus {
+            color: #1e3c72;
+            background-color: #fff;
+            border-color: #fff;
+            box-shadow: inset 200px 0 0 0 #fff;
+        }
+
+        div > article,
+        div > section,
+        aside article {
+            background: #fff;
+            max-width: 720px;
+            margin: 1.6rem auto;
+            padding: 1.8rem 2rem;
+            border-radius: 14px;
+            box-shadow: 0 8px 22px rgb(0 0 0 / 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease;
+            cursor: default;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        div > article::before,
+        div > section::before,
+        aside article::before {
+            content: "";
+            position: absolute;
+            top: -60%;
+            left: -30%;
+            width: 160%;
+            height: 220%;
+            background: radial-gradient(circle at center, #2a5298 15%, transparent 60%);
+            opacity: 0.07;
+            transform: rotate(25deg);
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            border-radius: 50%;
+            z-index: 0;
+        }
+        div > article:hover::before,
+        div > section:hover::before,
+        aside article:hover::before {
+            opacity: 0.12;
+        }
+        div > article:hover,
+        div > section:hover,
+        aside article:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 38px rgba(0,0,0,0.16);
+            border-color: #2a5298;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.2rem;
+            color: #1e3c72;
+            letter-spacing: 1.1px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.18);
+            font-weight: 800;
+            position: relative;
+            z-index: 1;
+            transition: color 0.5s ease;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            margin-top: 1rem;
+            margin-bottom: 0.8rem;
+            color: #2a5298;
+            font-weight: 700;
+            letter-spacing: 0.7px;
+            text-shadow: 1px 1px 3px rgba(42, 82, 152, 0.3);
+            transition: color 0.5s ease;
+        }
+
+        article img, section img, aside img {
+            width: 100%;
+            height: auto;
+            border-radius: 14px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            margin-bottom: 1.2rem;
+            transition: transform 0.3s ease, filter 0.5s ease;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+        article img:hover, section img:hover, aside img:hover {
+            transform: scale(1.08) rotate(1.2deg);
+            box-shadow: 0 14px 35px rgba(0,0,0,0.25);
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.55;
+            color: #444;
+            margin-bottom: 0;
+            text-align: justify;
+            font-weight: 400;
+            transition: color 0.5s ease;
+        }
+
+        aside {
+            max-width: 720px;
+            margin: 2.4rem auto 3rem auto;
+            padding: 1.2rem 1.5rem;
+            background: #fefefe;
+            box-shadow: 0 10px 26px rgba(42,82,152,0.05);
+            border-radius: 14px;
+            transition: background-color 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        aside header h2 {
+            color: #244a8e;
+            margin-top: 0;
+            font-weight: 800;
+            font-size: 2rem;
+            letter-spacing: 0.8px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+            transition: color 0.5s ease;
+        }
+        aside header p {
+            font-style: italic;
+            font-weight: 700;
+            color: #555;
+            margin-top: -0.25rem;
+            margin-bottom: 1.2rem;
+            transition: color 0.5s ease;
+        }
+        figure {
+            margin: 1.3rem auto;
+            text-align: center;
+            max-width: 260px;
+            position: relative;
+            z-index: 1;
+        }
+        figure img {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            border-radius: 14px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: transform 0.4s ease, filter 0.5s ease;
+        }
+        figure img:hover {
+            transform: scale(1.07);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+        }
+        figcaption {
+            margin-top: 0.4rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #1e3c72;
+            text-shadow: 1px 1px 4px rgba(42,82,152,0.4);
+            transition: color 0.5s ease;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.4rem;
+            font-weight: 600;
+            transition: color 0.5s ease;
+        }
+        th, td {
+            padding: 14px 18px;
+            border-bottom: 1px solid #ddd;
+            color: #2a5298;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            transition: color 0.5s ease;
+        }
+        th {
+            background: #2a5298;
+            color: white;
+            font-weight: 700;
+            text-align: left;
+            letter-spacing: 0.8px;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        footer {
+            background: #2a5298;
+            color: #f0f4f8;
+            text-align: center;
+            padding: 1.2rem 1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            box-shadow: 0 -5px 14px rgba(0,0,0,0.12);
+            margin-top: auto;
+            font-size: 1.2rem;
+            animation: fadeInUp 1.3s ease forwards;
+            text-transform: uppercase;
+            user-select: none;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            0% {
                 opacity: 0;
+                transform: translateY(-30px);
             }
-            nav ul.show {
+            100% {
                 opacity: 1;
+                transform: translateY(0);
             }
-            nav ul li {
-                font-weight: 600;
-                font-size: 1.1rem;
-            }
-            nav ul li a {
-                color: #fff;
-                text-decoration: none;
-                padding: 0.3rem 0.7rem;
-                border-radius: 5px;
-                transition: all 0.3s ease;
-                box-shadow: inset 0 0 0 0 #fff;
-                border: 2px solid transparent;
-            }
-            nav ul li a:hover,
-            nav ul li a:focus {
-                color: #1e3c72;
-                background-color: #fff;
-                border-color: #fff;
-                box-shadow: inset 200px 0 0 0 #fff;
-            }
+        }
 
-            div > article,
-            div > section,
-            aside article {
-                background: #fff;
-                max-width: 720px;
-                margin: 1.4rem auto;
-                padding: 1.6rem 1.8rem;
-                border-radius: 12px;
-                box-shadow: 0 6px 20px rgb(0 0 0 / 0.08);
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
-                cursor: default;
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
             }
-            div > article:hover,
-            div > section:hover,
-            aside article:hover {
-                transform: translateY(-6px);
-                box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+            100% {
+                opacity: 1;
+                transform: translateY(0);
             }
+        }
 
-            h2 {
-                font-size: 2rem;
-                margin-bottom: 1rem;
-                color: #1e3c72;
-                letter-spacing: 0.8px;
+        @keyframes floatImage {
+            0%, 100% {
+                transform: translateY(0);
             }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
 
-            article img, section img, aside img {
-                width: 100%;
-                max-width: 500px;
-                height: auto;
-                border-radius: 10px;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-                margin-bottom: 1rem;
-                transition: transform 0.3s ease;
-                display: block;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            article img:hover, section img:hover, aside img:hover {
-                transform: scale(1.07) rotate(1deg);
-            }
+        /* Dark mode styles */
+        .dark-mode {
+            background: #121217;
+            color: #ddd;
+            background-image:
+                radial-gradient(circle at 20% 20%, rgba(42, 82, 152, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(42, 82, 152, 0.15) 0%, transparent 40%);
+        }
 
-            p {
-                font-size: 1rem;
-                line-height: 1.55;
-                color: #444;
-                margin-bottom: 0;
-                text-align: justify;
-            }
+        .dark-mode header {
+            background: linear-gradient(135deg, #12182f 0%, #1e2a5a 100%);
+            color: #dde1e7;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.8);
+        }
+        .dark-mode header h1 {
+            text-shadow: 2px 2px 8px rgba(200,200,255,0.8);
+        }
+        .dark-mode header p {
+            color: #ccc;
+            text-shadow: none;
+        }
+        .dark-mode nav ul li a {
+            color: #dde1e7;
+        }
+        .dark-mode nav ul li a:hover,
+        .dark-mode nav ul li a:focus {
+            color: #12182f;
+            background-color: #dde1e7;
+            border-color: #dde1e7;
+            box-shadow: inset 200px 0 0 0 #dde1e7;
+        }
 
+        .dark-mode div > article,
+        .dark-mode div > section,
+        .dark-mode aside article {
+            background: #1e2238;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.8);
+            border-color: #3a4a86;
+        }
+        .dark-mode div > article::before,
+        .dark-mode div > section::before,
+        .dark-mode aside article::before {
+            background: radial-gradient(circle at center, #3a4a86 15%, transparent 70%);
+            opacity: 0.12;
+        }
+        .dark-mode h2,
+        .dark-mode aside header h2 {
+            color: #dde1e7;
+            text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
+        }
+        .dark-mode h3 {
+            color: #aab7ff;
+            text-shadow: 1px 1px 4px rgba(20, 30, 80, 0.7);
+        }
+        .dark-mode p {
+            color: #bbb;
+        }
+        .dark-mode aside {
+            background: #22263c;
+            box-shadow: 0 14px 34px rgba(10,20,40,0.8);
+        }
+        .dark-mode aside header p {
+            color: #999;
+        }
+        .dark-mode figure figcaption {
+            color: #a9b9ff;
+            text-shadow: 1px 1px 6px rgba(10, 20, 50, 0.8);
+        }
+        .dark-mode table th,
+        .dark-mode table td {
+            color: #a0aefa;
+            border-bottom-color: #444;
+        }
+        .dark-mode table th {
+            background: #3a4a86;
+            color: #e0e6ff;
+        }
+        .dark-mode footer {
+            background: #12182f;
+            color: #aab7ff;
+            box-shadow: 0 -8px 20px rgba(0,0,30,0.8);
+        }
+        .dark-mode article img,
+        .dark-mode section img,
+        .dark-mode aside img {
+            filter: brightness(0.9) contrast(1.1);
+            transition: transform 0.3s ease, filter 0.5s ease;
+        }
+        .dark-mode article img:hover,
+        .dark-mode section img:hover,
+        .dark-mode aside img:hover {
+            filter: brightness(1.1) contrast(1.1);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.4rem;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+            div > article, div > section, aside article {
+                margin: 1rem;
+                padding: 1.2rem;
+            }
             aside {
-                max-width: 720px;
-                margin: 2rem auto 3rem auto;
-                padding: 1rem 1.5rem;
+                padding: 1rem;
             }
-
-            aside header h2 {
-                color: #2a5298;
-                margin-top: 0;
-                font-weight: 700;
+            footer {
+                font-size: 1rem;
+                padding: 1rem 0.5rem;
+            }
+        }
+        @media (max-width: 400px) {
+            header h1 {
                 font-size: 1.8rem;
             }
-            aside header p {
-                font-style: italic;
-                font-weight: 600;
-                color: #666;
-                margin-top: -0.4rem;
-                margin-bottom: 1rem;
+            nav ul li {
+                font-size: 1rem; /* Adjust font size for smaller screens */
             }
-            figure {
-                margin: 1rem auto;
-                text-align: center;
-                max-width: 250px;
+            p {
+                font-size: 0.95rem; /* Adjust paragraph font size */
             }
-            figure img {
-                width: 100%;
-                max-width: 200px;
-                height: auto;
-                border-radius: 10px;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-            }
-            figcaption {
-                margin-top: 0.3rem;
-                font-weight: 600;
-                font-size: 1rem;
-                color: #1e3c72;
-            }
-
-            table {
-                width: 100%;
-                border-collapse: collapse;
-                margin-top: 1.2rem;
-            }
-            th, td {
-                padding: 12px 15px;
-                border-bottom: 1px solid #ddd;
-            }
-            th {
-                background: #2a5298;
-                color: white;
-                font-weight: 700;
-                text-align: left;
-            }
-
-            footer {
-                background: #1e3c72;
-                color: #fff;
-                text-align: center;
-                padding: 1rem 1rem;
-                font-weight: 600;
-                letter-spacing: 0.7px;
-                box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
-                margin-top: auto;
-            }
-
-            /* Animations */
-            @keyframes fadeInDown {
-                0% {
-                    opacity: 0;
-                    transform: translateY(-30px);
-                }
-                100% {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-
-            @keyframes fadeInUp {
-                0% {
-                    opacity: 0;
-                    transform: translateY(30px);
-                }
-                100% {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-
-            @keyframes floatImage {
-                0%, 100% {
-                    transform: translateY(0);
-                }
-                50% {
-                    transform: translateY(-15px);
-                }
-            }
-
-            /* Responsive adjustments */
-            @media (max-width: 768px) {
-                header h1 {
-                    font-size: 2rem;
-                }
-                nav ul {
-                    flex-direction: column;
-                    gap: 1rem;
-                }
-                div > article, div > section, aside article {
-                    margin: 1rem;
-                    padding: 1rem;
-                }
-                aside {
-                    padding: 1rem;
-                }
-            }
-            @media (max-width: 400px) {
-                header h1 {
-                    font-size: 1.5rem;
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <header> 
-            <h1>Bandung</h1> 
-            <img src="img/Gedung Sate.jpg" alt="logo" width="500px" height="100px" />
-            <p>Kota metropolitan terbesar di Provinsi Jawa Barat, sekaligus menjadi ibu kota provinsi tersebut.</p>
-            <nav>
-                <ul class="show">
-                    <li><a href="sejarah.html">Sejarah</a></li>
-                    <li><a href="geografis.html">Geografis</a></li>
-                    <li><a href="wisata.html">Wisata</a></li>
-                    <li><a href="lembang.html">Lembang</a></li>
-                    <li><a href="observatorium.html">Observatorium</a></li>
-                </ul> 
-            </nav>
-        </header>
-        <div>
+        }
+    </style>
+</head>
+<body>
+    <header> 
+        <h1>Bandung</h1> 
+        <button id="mode-toggle" aria-label="Toggle dark and light mode">Dark Mode</button>
+        <img src="img/Gedung Sate.jpg" alt="Gedung Sate" />
+        <p>Kota metropolitan terbesar di Provinsi Jawa Barat, sekaligus menjadi ibu kota provinsi tersebut.</p>
+        <nav>
+            <ul class="show">
+                <li><a href="sejarah.html">Sejarah</a></li>
+                <li><a href="geografis.html">Geografis</a></li>
+                <li><a href="wisata.html">Wisata</a></li>
+                <li><a href="lembang.html">Lembang</a></li>
+                <li><a href="observatorium.html">Observatorium</a></li>
+            </ul> 
+        </nav>
+    </header>
+    <div>
+        <article>
+            <h2>Sejarah</h2>
+            <img src="img/65e5346086f1a976234330.jpg" alt="Sejarah Bandung" />
+            <p> Kata Bandung berasal dari kata bendung atau bendungan karena terbendungnya sungai Citarum oleh lava Gunung Tangkuban Parahu yang lalu membentuk telaga. Legenda yang diceritakan oleh orang-orang tua di Bandung mengatakan bahwa nama Bandung diambil dari sebuah kendaraan air yang terdiri dari dua perahu yang diikat berdampingan yang disebut perahu bandung yang digunakan oleh Bupati Bandung, R.A. Wiranatakusumah II, untuk melayari Ci Tarum dalam mencari tempat kedudukan kabupaten yang baru untuk menggantikan ibu kota yang lama di Dayeuhkolot.
+            <br /><br />
+            Berdasarkan filosofi Sunda, kata Bandung juga berasal dari kalimat Nga-Bandung-an Banda Indung, yang merupakan kalimat sakral dan luhur karena mengandung nilai ajaran Sunda. Nga-Bandung-an artinya menyaksikan atau bersaksi. Banda adalah segala sesuatu yang berada di alam hidup yaitu di bumi dan atmosfer, baik makhluk hidup maupun benda mati. Sinonim dari banda adalah harta. Indung berarti Ibu atau Bumi, disebut juga sebagai Ibu Pertiwi tempat Banda berada.</p>
+        </article>
+        <article>
+            <h2>Geografis</h2>
+            <img src="img/185744962_medium.png" alt="Geografis Bandung" />
+            <p> Kota Bandung dikelilingi oleh pegunungan, sehingga bentuk morfologi wilayahnya bagaikan sebuah mangkok raksasa, secara geografis kota ini terletak di tengah-tengah provinsi Jawa Barat, serta berada pada ketinggian ±768 m di atas permukaan laut, dengan titik tertinggi di berada di sebelah utara dengan ketinggian 1.050 meter di atas permukaan laut dan sebelah selatan merupakan kawasan rendah dengan ketinggian 675 meter di atas permukaan laut.
+            <br /><br />
+            Kota Bandung dialiri dua sungai utama, yaitu Sungai Cikapundung dan Sungai Citarum beserta anak-anak sungainya yang pada umumnya mengalir ke arah selatan dan bertemu di Sungai Citarum. Dengan kondisi yang demikian, Bandung selatan sangat rentan terhadap masalah banjir terutama pada musim hujan.</p>
+        </article>
+        <article>
+            <h2>Wisata</h2>
+            <img src="img/Tempat-Wisata-di-Ciwidey-Bandung.jpg" alt="Wisata Bandung" />
+            <p> Sejak dibukanya Jalan Tol Cipularang, kota Bandung telah menjadi tujuan utama dalam menikmati liburan akhir pekan terutama dari masyarakat yang berasal dari Jakarta sekitarnya. Selain menjadi kota wisata belanja, kota Bandung juga dikenal dengan sejumlah besar bangunan lama berarsitektur peninggalan Belanda.</p>
+        </article>
+        <section>
+            <h2>Farm House Lembang</h2>
+            <img src="img/farm-house-susu-lembang-1_169.jpg" alt="Farm House Lembang" />
+            <p> Berada di jalur utama Bandung-Lembang, Farm House menjadi objek wisata yang tidak pernah sepi pengunjung. Selain karena letaknya strategis, kawasan ini juga menghadirkan nuansa wisata khas Eropa. Semua itu diterapkan dalam bentuk spot swafoto Instagramable.</p>
+        </section>
+        <section>
+            <h2>Observatorium Bosscha</h2> 
+            <img src="img/oservatorium-bosscha-2_169.jpg" alt="Observatorium Bosscha" />
+            <p> Memiliki beberapa teleskop, antara lain, Refraktor Ganda Zeiss, Schmidt Bimasakti, Refraktor Bamberg, Cassegrain GOTO, dan Teleskop Surya. Refraktor Ganda Zeiss adalah jenis teleskop terbesar untuk meneropong bintang. Benda ini diletakkan pada atap kubah sehingga saat teropong digunakan, atap tersebut harus dibuka. Observatorium Bosscha boleh dikunjungi oleh siapa pun, tanpa tiket. Namun, bagi yang ingin menggunakan teleskop Zeiss, wajib mendaftarkan diri. Untuk instansi atau lembaga pendidikan, diberikan jadwal hari Selasa sampai Jumat. Sementara itu, kunjungan individu dibuka setiap hari Sabtu.</p>
+        </section>
+        <aside>
             <article>
-                <h2>Sejarah</h2>
-                <img src="img/65e5346086f1a976234330.jpg" alt="logo" width="500px" height="100px" />
-                <p> Kata Bandung berasal dari kata bendung atau bendungan karena terbendungnya sungai Citarum oleh lava Gunung Tangkuban Parahu yang lalu membentuk telaga. Legenda yang diceritakan oleh orang-orang tua di Bandung mengatakan bahwa nama Bandung diambil dari sebuah kendaraan air yang terdiri dari dua perahu yang diikat berdampingan yang disebut perahu bandung yang digunakan oleh Bupati Bandung, R.A. Wiranatakusumah II, untuk melayari Ci Tarum dalam mencari tempat kedudukan kabupaten yang baru untuk menggantikan ibu kota yang lama di Dayeuhkolot.
-                <br /><br />
-                Berdasarkan filosofi Sunda, kata Bandung juga berasal dari kalimat Nga-Bandung-an Banda Indung, yang merupakan kalimat sakral dan luhur karena mengandung nilai ajaran Sunda. Nga-Bandung-an artinya menyaksikan atau bersaksi. Banda adalah segala sesuatu yang berada di alam hidup yaitu di bumi dan atmosfer, baik makhluk hidup maupun benda mati. Sinonim dari banda adalah harta. Indung berarti Ibu atau Bumi, disebut juga sebagai Ibu Pertiwi tempat Banda berada.</p>
+                <header>
+                    <h2>Kota Bandung</h2>
+                    <p>Kota Kembang Paris van Java</p>
+                    <figure>
+                        <img src="img/Lambang_Kota_Bandung.png" alt="Lambang Kota Bandung" />
+                        <figcaption>Lambang</figcaption>
+                    </figure>
+                </header>
+                <section>
+                    <h3>Informasi Lainnya</h3>
+                    <table>
+                        <tr>
+                            <th>Negara</th>
+                            <td>Indonesia</td>
+                        </tr>
+                        <tr>
+                            <th>Hari Jadi</th>
+                            <td>25 September 1810</td>
+                        </tr>
+                        <tr>
+                            <th>Luas Total</th>
+                            <td>167.67 km<sup>2</sup></td>
+                        </tr>
+                        <tr>
+                            <th>Bahasa Daerah</th>
+                            <td>Sunda</td>
+                        </tr>
+                    </table>
+                </section>
             </article>
-            <article>
-                <h2>Geografis</h2>
-                <img src="img/185744962_medium.png" alt="logo" width="500px" height="100px" />
-                <p> Kota Bandung dikelilingi oleh pegunungan, sehingga bentuk morfologi wilayahnya bagaikan sebuah mangkok raksasa, secara geografis kota ini terletak di tengah-tengah provinsi Jawa Barat, serta berada pada ketinggian ±768 m di atas permukaan laut, dengan titik tertinggi di berada di sebelah utara dengan ketinggian 1.050 meter di atas permukaan laut dan sebelah selatan merupakan kawasan rendah dengan ketinggian 675 meter di atas permukaan laut.
-                <br /><br />
-                Kota Bandung dialiri dua sungai utama, yaitu Sungai Cikapundung dan Sungai Citarum beserta anak-anak sungainya yang pada umumnya mengalir ke arah selatan dan bertemu di Sungai Citarum. Dengan kondisi yang demikian, Bandung selatan sangat rentan terhadap masalah banjir terutama pada musim hujan.</p>
-            </article>
-            <article>
-                <h2>Wisata</h2>
-                <img src="img/Tempat-Wisata-di-Ciwidey-Bandung.jpg" alt="logo" width="500px" height="100px" />
-                <p> Sejak dibukanya Jalan Tol Cipularang, kota Bandung telah menjadi tujuan utama dalam menikmati liburan akhir pekan terutama dari masyarakat yang berasal dari Jakarta sekitarnya. Selain menjadi kota wisata belanja, kota Bandung juga dikenal dengan sejumlah besar bangunan lama berarsitektur peninggalan Belanda.</p>
-            </article>
-            <section>
-                <h2>Farm House Lembang</h2>
-                <img src="img/farm-house-susu-lembang-1_169.jpg" alt="logo" width="500px" height="100px" />
-                <p> Berada di jalur utama Bandung-Lembang, Farm House menjadi objek wisata yang tidak pernah sepi pengunjung. Selain karena letaknya strategis, kawasan ini juga menghadirkan nuansa wisata khas Eropa. Semua itu diterapkan dalam bentuk spot swafoto Instagramable.</p>
-            </section>
-            <section>
-                <h2>Observatorium Bosscha</h2> 
-                <img src="img/oservatorium-bosscha-2_169.jpg" alt="logo" width="500px" height="100px" />
-                <p> Memiliki beberapa teleskop, antara lain, Refraktor Ganda Zeiss, Schmidt Bimasakti, Refraktor Bamberg, Cassegrain GOTO, dan Teleskop Surya. Refraktor Ganda Zeiss adalah jenis teleskop terbesar untuk meneropong bintang. Benda ini diletakkan pada atap kubah sehingga saat teropong digunakan, atap tersebut harus dibuka. Observatorium Bosscha boleh dikunjungi oleh siapa pun, tanpa tiket. Namun, bagi yang ingin menggunakan teleskop Zeiss, wajib mendaftarkan diri. Untuk instansi atau lembaga pendidikan, diberikan jadwal hari Selasa sampai Jumat. Sementara itu, kunjungan individu dibuka setiap hari Sabtu.</p>
-            </section>
-            <aside>
-                <article>
-                    <header>
-                        <h2>Kota Bandung</h2>
-                        <p>Kota Kembang Paris van Java</p>
-                        <figure>
-                            <img src="img/Lambang_Kota_Bandung.png" alt="logo" width="500px" height="150px" />
-                            <figcaption>Lambang</figcaption>
-                        </figure>
-                    </header>
-                    <section>
-                        <h3>Informasi Lainnya</h3>
-                        <table>
-                            <tr>
-                                <th>Negara</th>
-                                <td>Indonesia</td>
-                            </tr>
-                            <tr>
-                                <th>Hari Jadi</th>
-                                <td>25 September 1810</td>
-                            </tr>
-                            <tr>
-                                <th>Luas Total</th>
-                                <td>167.67 km<sup>2</sup></td>
-                            </tr>
-                            <tr>
-                                <th>Bahasa Daerah</th>
-                                <td>Sunda</td>
-                            </tr>
-                        </table>
-                    </section>
-                </article>
-            </aside>
-        </div>
-        <footer>WEB BY ZAYYIDAN</footer>
-    </body>
+        </aside>
+    </div>
+    <footer>WEB BY ZAYYIDAN</footer>
+
+    <script>
+        const toggleBtn = document.getElementById('mode-toggle');
+        const body = document.body;
+
+        // Load saved mode from localStorage
+        const savedMode = localStorage.getItem('colorMode');
+        if (savedMode === 'dark') {
+            body.classList.add('dark-mode');
+            toggleBtn.textContent = 'Light Mode';
+        } else {
+            toggleBtn.textContent = 'Dark Mode';
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                toggleBtn.textContent = 'Light Mode';
+                localStorage.setItem('colorMode', 'dark');
+            } else {
+                toggleBtn.textContent = 'Dark Mode';
+                localStorage.setItem('colorMode', 'light');
+            }
+        });
+    </script>
+</body>
 </html>
 

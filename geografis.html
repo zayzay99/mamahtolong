@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Geografis</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Geografis Bandung</title>
     <style>
         @keyframes fadeInUp {
             0% {
@@ -23,6 +23,7 @@
             background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
             color: #333;
             animation: fadeInUp 1s ease forwards;
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
         h2 {
             color: #054a91;
@@ -79,6 +80,24 @@
             line-height: 1.7;
             margin-bottom: 1.3em;
         }
+        /* Dark mode styles */
+        .dark-mode {
+            background: #121217;
+            color: #ddd;
+        }
+        .dark-mode div.content-wrapper {
+            background: #1e2238;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.8);
+        }
+        .dark-mode h2 {
+            color: #a1c4fd;
+        }
+        .dark-mode a {
+            background: linear-gradient(45deg, #0056b3, #1ab7ff);
+        }
+        .dark-mode a:hover {
+            background: linear-gradient(45deg, #004dcf, #1ab7ff);
+        }
         /* Responsive */
         @media (max-width: 600px) {
             body {
@@ -95,16 +114,63 @@
                 font-size: 0.95rem;
             }
         }
+        /* Toggle button styles */
+        #mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.3);
+            border: none;
+            border-radius: 20px;
+            padding: 10px 15px;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            user-select: none;
+        }
+        #mode-toggle:hover {
+            background: #fff;
+            color: #1e3c72;
+        }
     </style>
 </head>
 <body>
+    <button id="mode-toggle" aria-label="Toggle dark and light mode">Dark Mode</button>
     <a href="Beranda.html">Kembali</a>
     <div class="content-wrapper">
-        <h2 id="geografis">Geografis</h2>
-        <img src="img/185744962_medium.png" alt="geografis" />
-        <p>
-            Kota Bandung dikelilingi oleh pegunungan, sehingga bentuk morfologi wilayahnya bagaikan sebuah
-            mangkok raksasa. Secara geografis kota ini terletak di tengah-tengah provinsi Jawa Barat,
-            serta berada pada ketinggian ±768 m di atas permukaan laut, dengan titik tertinggi di berada
-            di sebelah utara dengan ketinggian 1.050 meter di atas permukaan laut dan sebelah selatan
-            merupakan kawasan rendah dengan keting
+        <h2 id="geografis">Geografis Bandung</h2>
+        <img src="img/185744962_medium.png" alt="Geografis Bandung" />
+        <p>Letak, Luas dan Batas Wilayah Kota Bandung terletak pada posisi 107º36’ Bujur Timur dan 6º55’ Lintang Selatan. Luas wilayah Kota Bandung adalah 16.729,65 Ha.</p>
+        <p>Perhitungan luasan ini didasarkan pada Peraturan Daerah Kotamadya Daerah Tingkat II Bandung Nomor 10 Tahun 1989 tentang Perubahan Batas Wilayah Kotamadya Daerah Tingkat II Bandung sebagai tindak lanjut dari Peraturan Pemerintah Nomor 16 Tahun 1987 tentang Perubahan Batas Wilayah Kotamadya Daerah Tingkat II Bandung dengan Kabupaten Daerah Tingkat II Bandung. Secara administratif, Kota Bandung berbatasan dengan beberapa daerah Kabupaten/Kota lainnya.</p>
+    </div>
+
+    <footer>WEB BY ZAYYIDAN</footer>
+
+    <script>
+        const toggleBtn = document.getElementById('mode-toggle');
+        const body = document.body;
+
+        // Load saved mode from localStorage
+        const savedMode = localStorage.getItem('colorMode');
+        if (savedMode === 'dark') {
+            body.classList.add('dark-mode');
+            toggleBtn.textContent = 'Light Mode';
+        } else {
+            toggleBtn.textContent = 'Dark Mode';
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                toggleBtn.textContent = 'Light Mode';
+                localStorage.setItem('colorMode', 'dark');
+            } else {
+                toggleBtn.textContent = 'Dark Mode';
+                localStorage.setItem('colorMode', 'light');
+            }
+        });
+    </script>
+</body>
+</html>
